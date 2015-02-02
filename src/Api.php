@@ -37,6 +37,11 @@ class Api
 
     public function getTriesLeft()
     {
+        return 11;
+    }
 
+    public function guessCharacter($attemptedCharacter)
+    {
+        
     }
 }
