@@ -36,11 +36,21 @@ class StartTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_fails_one_attempt_and_the_tries_left_decreases()
+    public function it_fails_one_attempt_and_the_tries_left_gets_decreased()
     {
         $game = Api::bootGame();
         $this->assertEquals(11, $game->getTriesLeft());
         $game->guessCharacter('x');
         $this->assertEquals(10, $game->getTriesLeft());
+    }
+
+    /** @test */
+    public function it_does_not_decrease_tries_left_when_character_is_correct()
+    {
+        $game = Api::bootGame();
+        $this->assertEquals(11, $game->getTriesLeft());
+        $correctWord = $game->getWord();
+        $game->guessCharacter($correctWord[0]);
+        $this->assertEquals(11, $game->getTriesLeft());
     }
 }

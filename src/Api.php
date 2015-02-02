@@ -17,8 +17,8 @@ class Api
     public function __construct()
     {
         $this->uuid = uniqid();
-        $this->word = 'someword';
-        $this->mask = implode('', array_fill(0, strlen($this->word), '.'));
+        $this->word = str_split('someword');
+        $this->mask = array_fill(0, sizeof($this->word), '.');
         $this->triesLeft = 11;
     }
 
@@ -29,12 +29,12 @@ class Api
 
     public function getMask()
     {
-        return $this->mask;
+        return implode('', $this->mask);
     }
 
     public function getWord()
     {
-        return $this->word;
+        return implode('', $this->word);
     }
 
     public function getTriesLeft()
@@ -44,6 +44,16 @@ class Api
 
     public function guessCharacter($attemptedCharacter)
     {
-        $this->triesLeft--;
+        $isCorrect = false;
+        foreach ($this->word as $key => $character) {
+            if ($character === $attemptedCharacter) {
+                $isCorrect = true;
+                $this->mask[$key] = $this->word[$key];
+            }
+        }
+
+        if (!$isCorrect) {
+            $this->triesLeft--;
+        }
     }
 }
