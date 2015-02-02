@@ -12,6 +12,7 @@ class Api
     protected $mask;
     protected $word;
     protected $triesLeft;
+    protected $status;
 
     public static function bootGame()
     {
@@ -24,6 +25,7 @@ class Api
         $this->word = str_split('someword');
         $this->mask = array_fill(0, sizeof($this->word), '.');
         $this->triesLeft = 11;
+        $this->status = self::GAME_BUSY;
     }
 
     public function __toString()
@@ -63,6 +65,6 @@ class Api
 
     public function getStatus()
     {
-        return true;
+        return $this->status;
     }
 }
