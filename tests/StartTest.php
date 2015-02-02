@@ -14,18 +14,17 @@ class StartTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function a_new_game_has_not_been_guessed_a_word()
+    public function it_ensures_new_game_displays_dotted_mask()
     {
         $game = Api::bootGame();
-        $word = $game->getWord();
-        $firstWord = strlen($word);
-        $this->assertTrue($firstWord > 0 && 1 === preg_match('/^\.*$/', $word));
+        $mask = $game->getMask();
+        $this->assertTrue(strlen($mask) > 0 && 1 === preg_match('/^\.*$/', $mask));
+    }
 
-
+    /** @test */
+    public function it_initialize_word_and_initial_guess_of_the_same_length()
+    {
         $game = Api::bootGame();
-        $word = $game->getWord();
-        $secondWord = strlen($word);
-        $this->assertNotEquals($firstWord, $secondWord);
-        $this->assertTrue($secondWord > 0 && 1 === preg_match('/^\.*$/', $word));
+        $this->assertEquals(strlen($game->getMask()), strlen($game->getWord()));
     }
 }
