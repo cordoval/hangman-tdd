@@ -60,6 +60,4 @@ class StartTest extends \PHPUnit_Framework_TestCase
         $game = Api::bootGame();
         $this->assertEquals(Api::GAME_BUSY, $game->getStatus());
     }
-
-
 }

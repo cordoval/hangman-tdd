@@ -4,9 +4,9 @@ namespace Qandidate;
 
 class Api
 {
-    const GAME_BUSY = 0;
-    const GAME_FAIL = 1;
-    const GAME_SUCCESS = 2;
+    const GAME_BUSY = 'busy';
+    const GAME_FAIL = 'fail';
+    const GAME_SUCCESS = 'success';
 
     protected $uuid;
     protected $mask;
@@ -19,10 +19,10 @@ class Api
         return new self();
     }
 
-    public function __construct()
+    public function __construct($seedWord = 'someword')
     {
         $this->uuid = uniqid();
-        $this->word = str_split('someword');
+        $this->word = str_split($seedWord);
         $this->mask = array_fill(0, sizeof($this->word), '.');
         $this->triesLeft = 11;
         $this->status = self::GAME_BUSY;
