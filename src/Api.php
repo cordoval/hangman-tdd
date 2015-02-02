@@ -14,9 +14,9 @@ class Api
     protected $triesLeft;
     protected $status;
 
-    public static function bootGame()
+    public static function bootGame($seedWord = 'someword')
     {
-        return new self();
+        return new self($seedWord);
     }
 
     public function __construct($seedWord = 'someword')

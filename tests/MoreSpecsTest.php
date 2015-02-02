@@ -26,4 +26,16 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
             ['abcd'],
         ];
     }
+
+    /** @test */
+    public function it_increments_dots_in_the_middle_of_a_guess()
+    {
+
+    }
+
+    /** @test */
+    public function it_fetches_seedword_from_word_list()
+    {
+
+    }
 }
