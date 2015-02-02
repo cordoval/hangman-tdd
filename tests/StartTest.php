@@ -10,6 +10,6 @@ class StartTest extends \PHPUnit_Framework_TestCase
     public function it_starts_a_game()
     {
         $game = Api::bootGame();
-        $this->assertTrue(is_int($game->getWord()));
+        $this->assertTrue(is_string((string) $game));
     }
 }
