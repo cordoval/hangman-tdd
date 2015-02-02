@@ -1,0 +1,26 @@
+{
+    "name": "qandidate/hangman",
+    "type": "project",
+    "description": "Hangman",
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "symfony/console": "~2.5.0",
+        "symfony/process": "~2.5.0",
+        "symfony/filesystem": "~2.5.0",
+        "symfony/finder": "~2.5.0",
+        "symfony/yaml": "~2.5.0",
+        "symfony/event-dispatcher": "~2.5.0",
+        "symfony/property-access": "~2.5.0"
+    },
+    "require-dev": {
+        "raulfraile/ladybug": "~1.0.8",
+        "phpspec/prophecy": "~1.2.1"
+    },
+    "autoload": {
+        "psr-4": {"Qandidate\\": "src"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Qandidate\\Tests\\": "tests"}
+    }
+}
