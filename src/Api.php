@@ -61,10 +61,26 @@ class Api
         if (!$isCorrect) {
             $this->triesLeft--;
         }
+
+        $this->updateState();
     }
 
     public function getStatus()
     {
         return $this->status;
+    }
+
+    private function updateState()
+    {
+        $isCompleted = true;
+        foreach ($this->mask as $character) {
+            if ($character === '.') {
+                $isCompleted = false;
+            }
+        }
+
+        if ($isCompleted) {
+            $this->status = self::GAME_SUCCESS;
+        }
     }
 }
