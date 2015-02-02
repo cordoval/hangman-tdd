@@ -18,6 +18,14 @@ class StartTest extends \PHPUnit_Framework_TestCase
     {
         $game = Api::bootGame();
         $word = $game->getWord();
-        $this->assertTrue(strlen($word) > 0 && 1 === preg_match('/^\.*$/', $word));
+        $firstWord = strlen($word);
+        $this->assertTrue($firstWord > 0 && 1 === preg_match('/^\.*$/', $word));
+
+
+        $game = Api::bootGame();
+        $word = $game->getWord();
+        $secondWord = strlen($word);
+        $this->assertNotEquals($firstWord, $secondWord);
+        $this->assertTrue($secondWord > 0 && 1 === preg_match('/^\.*$/', $word));
     }
 }
