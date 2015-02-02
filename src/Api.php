@@ -15,7 +15,7 @@ class Api
     public function __construct()
     {
         $this->uuid = uniqid();
-        $this->word = '';
+        $this->word = '.......';
     }
 
     public function __toString()
