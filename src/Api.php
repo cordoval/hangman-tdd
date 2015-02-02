@@ -34,4 +34,9 @@ class Api
     {
         return $this->word;
     }
+
+    public function getTriesLeft()
+    {
+
+    }
 }

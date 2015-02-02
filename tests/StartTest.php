@@ -22,9 +22,16 @@ class StartTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_initialize_word_and_initial_guess_of_the_same_length()
+    public function it_initializes_word_and_initial_guess_of_the_same_length()
     {
         $game = Api::bootGame();
         $this->assertEquals(strlen($game->getMask()), strlen($game->getWord()));
+    }
+
+    /** @test */
+    public function it_starts_with_numbers_of_tries_left_set_to_11()
+    {
+        $game = Api::bootGame();
+        $this->assertEquals(11, $game->getTriesLeft());
     }
 }
