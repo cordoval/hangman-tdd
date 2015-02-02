@@ -12,4 +12,12 @@ class StartTest extends \PHPUnit_Framework_TestCase
         $game = Api::bootGame();
         $this->assertTrue(is_string((string) $game));
     }
+
+    /** @test */
+    public function a_new_game_has_not_been_guessed_a_word()
+    {
+        $game = Api::bootGame();
+        $word = $game->getWord();
+        $this->assertTrue(strlen($word) > 0 && 1 === preg_match('/^\.*$/', $word));
+    }
 }

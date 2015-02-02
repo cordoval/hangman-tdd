@@ -5,6 +5,7 @@ namespace Qandidate;
 class Api
 {
     protected $uuid;
+    protected $word;
 
     public static function bootGame()
     {
@@ -14,10 +15,16 @@ class Api
     public function __construct()
     {
         $this->uuid = uniqid();
+        $this->word = '';
     }
 
     public function __toString()
     {
         return $this->uuid;
+    }
+
+    public function getWord()
+    {
+        return $this->word;
     }
 }
