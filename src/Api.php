@@ -7,6 +7,7 @@ class Api
     protected $uuid;
     protected $mask;
     protected $word;
+    protected $triesLeft;
 
     public static function bootGame()
     {
@@ -18,6 +19,7 @@ class Api
         $this->uuid = uniqid();
         $this->word = 'someword';
         $this->mask = implode('', array_fill(0, strlen($this->word), '.'));
+        $this->triesLeft = 11;
     }
 
     public function __toString()
@@ -37,11 +39,11 @@ class Api
 
     public function getTriesLeft()
     {
-        return 11;
+        return $this->triesLeft;
     }
 
     public function guessCharacter($attemptedCharacter)
     {
-        
+        $this->triesLeft--;
     }
 }
