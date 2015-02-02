@@ -50,6 +50,8 @@ class Api
 
     public function guessCharacter($attemptedCharacter)
     {
+        $this->validateInput($attemptedCharacter);
+
         $isCorrect = false;
         foreach ($this->word as $key => $character) {
             if ($character === $attemptedCharacter) {
@@ -85,6 +87,13 @@ class Api
 
         if ($isCompleted) {
             $this->status = self::GAME_SUCCESS;
+        }
+    }
+
+    private function validateInput($attemptedCharacter)
+    {
+        if (!preg_match('/[a-z]/', $attemptedCharacter)) {
+            throw new \InvalidArgumentException('Please provide input with pattern a-z');
         }
     }
 }
