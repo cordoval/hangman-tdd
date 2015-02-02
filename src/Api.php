@@ -92,7 +92,7 @@ class Api
 
     private function validateInput($attemptedCharacter)
     {
-        if (!preg_match('/[a-z]/', $attemptedCharacter)) {
+        if (!preg_match('/^[a-z]$/', $attemptedCharacter)) {
             throw new \InvalidArgumentException('Please provide input with pattern a-z');
         }
     }
