@@ -72,11 +72,15 @@ class Api
 
     private function updateState()
     {
+        if ($this->triesLeft < 1) {
+            $this->status = self::GAME_FAIL;
+
+            return;
+        }
+
         $isCompleted = true;
-        foreach ($this->mask as $character) {
-            if ($character === '.') {
-                $isCompleted = false;
-            }
+        if (in_array('.', $this->mask)) {
+            $isCompleted = false;
         }
 
         if ($isCompleted) {
