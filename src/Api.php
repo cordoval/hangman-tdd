@@ -4,6 +4,10 @@ namespace Qandidate;
 
 class Api
 {
+    const GAME_BUSY = 0;
+    const GAME_FAIL = 1;
+    const GAME_SUCCESS = 2;
+
     protected $uuid;
     protected $mask;
     protected $word;
@@ -55,5 +59,10 @@ class Api
         if (!$isCorrect) {
             $this->triesLeft--;
         }
+    }
+
+    public function getStatus()
+    {
+        return true;
     }
 }
