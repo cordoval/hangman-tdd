@@ -1,6 +1,8 @@
 <?php
 
-namespace Qandidate;
+namespace Qandidate\Tests\WordList;
+
+use Qandidate\WordList;
 
 class AccessTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,5 +25,14 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     {
         $wordList = WordList::boot();
         $this->assertEquals('zzzs', $wordList->getWordAt(WordList::END_LINE_NUMBER_OF_FILE));
+    }
+
+    /** @test */
+    public function it_fetches_random_line()
+    {
+        $wordList = WordList::boot();
+        foreach (range(1, 10) as $i) {
+            $this->assertRegExp('/[a-z]([a-z])*/', $wordList->getWordAtRandom());
+        }
     }
 }
