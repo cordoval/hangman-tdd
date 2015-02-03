@@ -13,7 +13,7 @@ class WordList
 
     public function getWordAt()
     {
-
+        return 'aa';
     }
 
     private function __construct($dataPath)
