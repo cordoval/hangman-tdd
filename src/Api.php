@@ -84,12 +84,7 @@ class Api
             return;
         }
 
-        $isCompleted = true;
-        if (in_array(self::UNKNOWN_CHARACTER, $this->mask)) {
-            $isCompleted = false;
-        }
-
-        if ($isCompleted) {
+        if (!in_array(self::UNKNOWN_CHARACTER, $this->mask)) {
             $this->status = self::GAME_SUCCESS;
         }
     }
