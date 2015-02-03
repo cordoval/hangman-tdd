@@ -28,9 +28,19 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_increments_dots_in_the_middle_of_a_guess()
+    public function it_does_and_does_not_increment_dots_in_the_middle_of_a_game()
     {
-
+        $game = Api::bootGame();
+        $this->assertEquals(11, $game->getTriesLeft());
+        $game->guessCharacter('p');
+        $this->assertEquals(10, $game->getTriesLeft());
+        $this->assertEquals('........', $game->getMask());
+        $game->guessCharacter('s');
+        $this->assertEquals(10, $game->getTriesLeft());
+        $this->assertEquals('s.......', $game->getMask());
+        $game->guessCharacter('o');
+        $this->assertEquals(10, $game->getTriesLeft());
+        $this->assertEquals('so...o..', $game->getMask());
     }
 
     /** @test */
