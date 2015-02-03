@@ -15,6 +15,6 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     public function it_fetches_third_word_from_large_file()
     {
         $wordList = WordList::boot();
-        $this->assertEquals('aahing', $wordList->getWordAt(2));
+        $this->assertEquals('aahed', $wordList->getWordAt(2));
     }
 }
