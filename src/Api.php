@@ -7,6 +7,10 @@ class Api
     const GAME_BUSY = 'busy';
     const GAME_FAIL = 'fail';
     const GAME_SUCCESS = 'success';
+    const MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS = 11;
+    const UNKNOWN_CHARACTER = '.';
+    const FROM_A_TO_Z = '/^[a-z]$/';
+    const DEFAULT_SEED_WORD = 'someword';
 
     protected $uuid;
     protected $mask;
@@ -14,17 +18,17 @@ class Api
     protected $triesLeft;
     protected $status;
 
-    public static function bootGame($seedWord = 'someword')
+    public static function bootGame($seedWord = self::DEFAULT_SEED_WORD)
     {
         return new self($seedWord);
     }
 
-    public function __construct($seedWord = 'someword')
+    private function __construct($seedWord)
     {
         $this->uuid = uniqid();
         $this->word = str_split($seedWord);
-        $this->mask = array_fill(0, sizeof($this->word), '.');
-        $this->triesLeft = 11;
+        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
+        $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
         $this->status = self::GAME_BUSY;
     }
 
@@ -81,7 +85,7 @@ class Api
         }
 
         $isCompleted = true;
-        if (in_array('.', $this->mask)) {
+        if (in_array(self::UNKNOWN_CHARACTER, $this->mask)) {
             $isCompleted = false;
         }
 
@@ -92,7 +96,7 @@ class Api
 
     private function validateInput($attemptedCharacter)
     {
-        if (!preg_match('/^[a-z]$/', $attemptedCharacter)) {
+        if (!preg_match(self::FROM_A_TO_Z, $attemptedCharacter)) {
             throw new \InvalidArgumentException('Please provide input with pattern a-z');
         }
     }
