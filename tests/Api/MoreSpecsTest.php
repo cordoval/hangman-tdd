@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests;
+namespace Qandidate\Tests\Api;
 
 use Qandidate\Api;
 
@@ -41,11 +41,5 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
         $game->guessCharacter('o');
         $this->assertEquals(10, $game->getTriesLeft());
         $this->assertEquals('so...o..', $game->getMask());
-    }
-
-    /** @test */
-    public function it_fetches_seedword_from_word_list()
-    {
-
     }
 }

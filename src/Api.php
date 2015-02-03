@@ -12,44 +12,15 @@ class Api
     const FROM_A_TO_Z = '/^[a-z]$/';
     const DEFAULT_SEED_WORD = 'someword';
 
-    protected $uuid;
-    protected $mask;
-    protected $word;
-    protected $triesLeft;
-    protected $status;
+    private $uuid;
+    private $mask;
+    private $word;
+    private $triesLeft;
+    private $status;
 
     public static function bootGame($seedWord = self::DEFAULT_SEED_WORD)
     {
         return new self($seedWord);
-    }
-
-    private function __construct($seedWord)
-    {
-        $this->uuid = uniqid();
-        $this->word = str_split($seedWord);
-        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
-        $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
-        $this->status = self::GAME_BUSY;
-    }
-
-    public function __toString()
-    {
-        return $this->uuid;
-    }
-
-    public function getMask()
-    {
-        return implode('', $this->mask);
-    }
-
-    public function getWord()
-    {
-        return implode('', $this->word);
-    }
-
-    public function getTriesLeft()
-    {
-        return $this->triesLeft;
     }
 
     public function guessCharacter($attemptedCharacter)
@@ -71,9 +42,38 @@ class Api
         $this->updateState();
     }
 
+    public function getMask()
+    {
+        return implode('', $this->mask);
+    }
+
+    public function getWord()
+    {
+        return implode('', $this->word);
+    }
+
+    public function getTriesLeft()
+    {
+        return $this->triesLeft;
+    }
+
     public function getStatus()
     {
         return $this->status;
+    }
+
+    public function __toString()
+    {
+        return $this->uuid;
+    }
+
+    private function __construct($seedWord)
+    {
+        $this->uuid = uniqid();
+        $this->word = str_split($seedWord);
+        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
+        $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
+        $this->status = self::GAME_BUSY;
     }
 
     private function updateState()
