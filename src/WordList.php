@@ -7,8 +7,8 @@ use \SplFileObject;
 class WordList
 {
     const DATA_PATH = __DIR__.'/../data/words.english';
+    const END_LINE_NUMBER_OF_FILE = 274906;
 
-    /** @var SplFileObject */
     protected $file;
 
     public static function boot($dataPath = self::DATA_PATH)
