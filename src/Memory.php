@@ -33,11 +33,11 @@ class Memory implements \ArrayAccess
 
     public function save(Api $game)
     {
-
+        $this[(string) $game] = serialize($game);
     }
 
     public function find($uuid)
     {
-
+        return unserialize($this[$uuid]);
     }
 }
