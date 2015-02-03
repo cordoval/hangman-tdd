@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests\Web;
+namespace Qandidate;
 
 class Memory implements \ArrayAccess
 {
@@ -29,5 +29,15 @@ class Memory implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->bank[$offset]);
+    }
+
+    public function save(Api $game)
+    {
+
+    }
+
+    public function find($uuid)
+    {
+
     }
 }
