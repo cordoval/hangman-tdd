@@ -42,4 +42,25 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $game->getTriesLeft());
         $this->assertEquals('so...o..', $game->getMask());
     }
+
+    /** @test */
+    public function it_can_be_serialized_and_persisted_to_simple_key_value_data_store()
+    {
+        $game = Api::bootGame();
+        $game->guessCharacter('s');
+        $game->guessCharacter('o');
+        $game->guessCharacter('m');
+        $game->guessCharacter('e');
+        $game->guessCharacter('z');
+        $uuid = (string) $game;
+
+        $serialized = serialize($game);
+        $restoredObject = unserialize($serialized);
+
+        $this->assertEquals('some.o..', $restoredObject->getMask());
+        $this->assertEquals(10, $restoredObject->getTriesLeft());
+        $this->assertEquals('someword', $restoredObject->getWord());
+        $this->assertEquals(Api::GAME_BUSY, $restoredObject->getStatus());
+        $this->assertEquals($uuid, (string) $restoredObject);
+    }
 }
