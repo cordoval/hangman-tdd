@@ -4,7 +4,6 @@
     "description": "Hangman",
     "require": {
         "php": ">=5.4",
-        "ext-curl": "*",
         "symfony/console": "~2.5.0",
         "symfony/process": "~2.5.0",
         "symfony/filesystem": "~2.5.0",
@@ -14,8 +13,7 @@
         "symfony/property-access": "~2.5.0"
     },
     "require-dev": {
-        "raulfraile/ladybug": "~1.0.8",
-        "phpspec/prophecy": "~1.2.1"
+        "raulfraile/ladybug": "~1.0.8"
     },
     "autoload": {
         "psr-4": {"Qandidate\\": "src"}
