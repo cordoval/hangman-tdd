@@ -3,6 +3,7 @@
 namespace Qandidate\Tests\Api;
 
 use Qandidate\Api;
+use Qandidate\Exception\GameHasAlreadyEnded;
 
 class EndTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +46,7 @@ class EndTest extends \PHPUnit_Framework_TestCase
         $game->guessCharacter('o');
         $this->assertEquals(Api::GAME_SUCCESS, $game->getStatus());
 
-        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
+        $this->setExpectedException(GameHasAlreadyEnded::class);
         $game->guessCharacter('x');
     }
 
@@ -58,7 +59,7 @@ class EndTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals(Api::GAME_FAIL, $game->getStatus());
 
-        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
+        $this->setExpectedException(GameHasAlreadyEnded::class);
         $game->guessCharacter('x');
     }
 }
