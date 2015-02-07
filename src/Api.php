@@ -102,7 +102,7 @@ class Api
 
     private function guardGameIsNotOver()
     {
-        if ($this->status == self::GAME_SUCCESS) {
+        if ($this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL) {
             throw new GameHasAlreadyEnded();
         }
     }
