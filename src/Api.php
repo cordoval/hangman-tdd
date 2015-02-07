@@ -46,6 +46,11 @@ class Api
         $this->updateState();
     }
 
+    public function hasGameEnded()
+    {
+        return $this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL;
+    }
+
     public function getMask()
     {
         return implode('', $this->mask);
@@ -102,7 +107,7 @@ class Api
 
     private function guardGameIsNotOver()
     {
-        if ($this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL) {
+        if ($this->hasGameEnded()) {
             throw new GameHasAlreadyEnded();
         }
     }
