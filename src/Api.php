@@ -2,6 +2,8 @@
 
 namespace Qandidate;
 
+use Qandidate\Exception\GameHasAlreadyEnded;
+
 class Api
 {
     const GAME_BUSY = 'busy';
@@ -25,6 +27,8 @@ class Api
 
     public function guessCharacter($attemptedCharacter)
     {
+        $this->guardGameIsNotOver();
+
         $this->validateInput($attemptedCharacter);
 
         $isCorrect = false;
@@ -93,6 +97,13 @@ class Api
     {
         if (!preg_match(self::FROM_A_TO_Z, $attemptedCharacter)) {
             throw new \InvalidArgumentException('Please provide input with pattern a-z');
+        }
+    }
+
+    private function guardGameIsNotOver()
+    {
+        if ($this->status == self::GAME_SUCCESS) {
+            throw new GameHasAlreadyEnded();
         }
     }
 }
