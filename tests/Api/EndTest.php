@@ -40,23 +40,25 @@ class EndTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_does_not_allow_to_keep_guessing_after_game_has_been_won()
     {
-        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
         $game = Api::bootGame('so');
         $game->guessCharacter('s');
         $game->guessCharacter('o');
         $this->assertEquals(Api::GAME_SUCCESS, $game->getStatus());
+
+        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
         $game->guessCharacter('x');
     }
 
     /** @test */
     public function it_does_not_allow_to_keep_guessing_after_game_has_been_lost()
     {
-        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
         $game = Api::bootGame('so');
         foreach (str_split('abcfghijklm') as $character) {
             $game->guessCharacter($character);
         }
         $this->assertEquals(Api::GAME_FAIL, $game->getStatus());
+
+        $this->setExpectedException('Qandidate\Exception\GameHasAlreadyEnded');
         $game->guessCharacter('x');
     }
 }
