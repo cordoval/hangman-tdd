@@ -1,0 +1,4 @@
+services:
+    repository.game:
+        class: Qandidate\GameRepository
+        arguments: []
