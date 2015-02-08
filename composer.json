@@ -12,9 +12,6 @@
         "incenteev/composer-parameter-handler": "~2.0.0",
         "nicolopignatelli/valueobjects": "~2.2.0"
     },
-    "require-dev": {
-        "raulfraile/ladybug": "~1.0.8"
-    },
     "autoload": {
         "psr-4": {"Qandidate\\": "src"},
         "files": ["app/AppKernel.php"]
