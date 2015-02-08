@@ -18,5 +18,5 @@ before_install:
     - php ./bldr.phar install
 
 script:
-    - php ./bldr.phar run travis
+    - php ./bldr.phar run
     - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ]; then php ./bldr.phar run secure; fi;'
