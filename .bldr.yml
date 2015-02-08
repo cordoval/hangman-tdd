@@ -1,0 +1,162 @@
+bldr:
+    name: qandidate/hangman
+    description: Qandidate Hangman
+    profiles:
+        travis:
+            description: Travis Profile
+            jobs:
+                - prepare
+                - lint
+                - test
+        local:
+            description: Local Development Profile
+            jobs:
+                - testLocal
+                - watch
+        rebase:
+            description: Gush rebase flow
+            jobs:
+                - gushRebase
+        merge:
+            description: Gush merge flow
+            jobs:
+                - gushMerge
+        secure:
+            description: run security script
+            jobs:
+                - secure
+        minor:
+            description: minor run
+            jobs:
+                - minor
+        major:
+            description: major run
+            jobs:
+                - major
+        patch:
+            description: patch run
+            jobs:
+                - patch
+    jobs:
+        prepare:
+            tasks:
+                -
+                    continueOnError: true
+                    type: filesystem:remove
+                    files: [build/coverage, build/logs]
+                -
+                    type: filesystem:mkdir
+                    continueOnError: false
+                    files: [build/coverage, build/logs]
+                -
+                    type: filesystem:touch
+                    continueOnError: true
+                    files: [build/coverage/index.html]
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: composer
+                    arguments: [install]
+        secure:
+            tasks:
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: rm
+                    arguments:
+                        - ./security-checker.phar
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: curl
+                    arguments:
+                        - -o
+                        - security-checker.phar
+                        - http://get.sensiolabs.org/security-checker.phar
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: chmod
+                    arguments:
+                        - +x
+                        - ./security-checker.phar
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: php
+                    arguments:
+                        - ./security-checker.phar
+                        - security:check
+                        - ./composer.json
+        lint:
+            description: Lints the files of the project
+            tasks:
+                -
+                    type: apply
+                    continueOnError: false
+                    src:
+                        - { path: [src, tests], files: "*.php", recursive: true }
+                    output: /dev/null
+                    executable: php
+                    arguments: [-l]
+        test:
+            description: Runs the PHPUnit Tests
+            tasks:
+                -
+                    type: exec
+                    continueOnError: false
+                    executable: phpunit
+                    arguments:
+                        - --coverage-html=build/coverage
+                        - --coverage-text=php://stdout
+        testLocal:
+            description: Runs the PHPUnit Tests
+            tasks:
+                -
+                    type: exec
+                    continueOnError: true
+                    executable: phpunit
+                    arguments:
+                        #- --group=now
+        watch:
+            description: Watch Task for Local Development
+            tasks:
+                -
+                    type: watch
+                    src:
+                        - { path: [src, tests], files: "*.php", recursive: true }
+                    task: testLocal
+        gushRebase:
+            description: Gush rebase flow
+            tasks:
+                -
+                    type: gush:branch:rebase
+                    base_branch: master
+        gushMerge:
+            description: Gush merge flow
+            tasks:
+                -
+                    type: gush:pull-request:merge
+                    base_branch: master
+                    symlinked: true
+        minor:
+            description: Gush block tag minor release
+            tasks:
+                -
+                    type: gush:branch:tag
+                    base_branch: master
+                    release: minor
+        major:
+            description: Gush block tag major release
+            tasks:
+                -
+                    type: gush:branch:tag
+                    base_branch: master
+                    release: major
+        patch:
+            description: Gush block tag patch release
+            tasks:
+                -
+                    type: gush:branch:tag
+                    base_branch: master
+                    release: patch

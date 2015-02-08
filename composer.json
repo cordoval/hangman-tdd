@@ -4,19 +4,20 @@
     "description": "Hangman",
     "require": {
         "php": ">=5.4",
-        "symfony/console": "~2.5.0",
-        "symfony/process": "~2.5.0",
-        "symfony/filesystem": "~2.5.0",
-        "symfony/finder": "~2.5.0",
-        "symfony/yaml": "~2.5.0",
-        "symfony/event-dispatcher": "~2.5.0",
-        "symfony/property-access": "~2.5.0"
+        "symfony/symfony": "~2.6.0",
+        "twig/extensions": "~1.0.0",
+        "symfony/assetic-bundle": "~2.4.0",
+        "sensio/distribution-bundle": "~2.3.0",
+        "sensio/framework-extra-bundle": "~3.0.0",
+        "incenteev/composer-parameter-handler": "~2.0.0",
+        "nicolopignatelli/valueobjects": "~2.2.0"
     },
     "require-dev": {
         "raulfraile/ladybug": "~1.0.8"
     },
     "autoload": {
-        "psr-4": {"Qandidate\\": "src"}
+        "psr-4": {"Qandidate\\": "src"},
+        "files": ["app/AppKernel.php"]
     },
     "autoload-dev": {
         "psr-4": {"Qandidate\\Tests\\": "tests"}
