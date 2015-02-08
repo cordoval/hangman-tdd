@@ -2,7 +2,7 @@
 
 namespace Qandidate;
 
-class Memory implements \ArrayAccess
+class InMemoryStorage implements \ArrayAccess
 {
     private $bank;
 
