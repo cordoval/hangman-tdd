@@ -12,14 +12,34 @@
         "incenteev/composer-parameter-handler": "~2.0.0",
         "nicolopignatelli/valueobjects": "~2.2.0"
     },
-    "require-dev": {
-        "raulfraile/ladybug": "~1.0.8"
-    },
     "autoload": {
         "psr-4": {"Qandidate\\": "src"},
         "files": ["app/AppKernel.php"]
     },
     "autoload-dev": {
         "psr-4": {"Qandidate\\Tests\\": "tests"}
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+        ]
+    },
+    "config": {
+        "discard-changes": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
     }
 }
