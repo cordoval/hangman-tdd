@@ -6,7 +6,7 @@ use SQLite3;
 
 class SqliteStorage implements GameStorage
 {
-    const DB_FILE_LOCATION = __DIR__.'/../data/games.db';
+    const DB_FILE_LOCATION = __DIR__.'/../data/games.db3';
 
     private $db;
 
@@ -34,7 +34,9 @@ class SqliteStorage implements GameStorage
 
     public static function wipeAndBoot()
     {
+        touch(self::DB_FILE_LOCATION);
         unlink(self::DB_FILE_LOCATION);
+
         $db = new SQLite3(self::DB_FILE_LOCATION);
         $db->exec('CREATE TABLE games (uuid STRING, games STRING)');
     }

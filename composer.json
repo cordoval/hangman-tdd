@@ -21,5 +21,28 @@
     },
     "autoload-dev": {
         "psr-4": {"Qandidate\\Tests\\": "tests"}
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
+            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+        ]
+    },
+    "config": {
+        "discard-changes": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
     }
 }
