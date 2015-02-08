@@ -20,7 +20,7 @@ class SqliteStorage implements GameStorage
     {
         $stmt = $this->db->prepare("INSERT INTO game (uuid, game) VALUES (:uuid, :game)");
         $stmt->bindValue(':uuid', (string) $game, SQLITE3_TEXT);
-        $stmt->bindValue(':game', serialize($game), SQLITE3_TEXT);
+        $stmt->bindValue(':game', base64_encode(serialize($game)), SQLITE3_TEXT);
         $stmt->execute();
     }
 
@@ -29,8 +29,8 @@ class SqliteStorage implements GameStorage
         $stmt = $this->db->prepare('SELECT * FROM game WHERE game.uuid = :uuid');
         $stmt->bindValue(':uuid', $uuid, SQLITE3_TEXT);
         $result = $stmt->execute();
-        VarDumper::dump($result->fetchArray(SQLITE3_ASSOC)['game']);
-        return unserialize(1);
+
+        return unserialize(base64_decode($result->fetchArray(SQLITE3_ASSOC)['game']));
     }
 
     public static function wipeAndBoot()
