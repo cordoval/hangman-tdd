@@ -7,6 +7,12 @@ matrix:
     allow_failures:
         - php: hhvm-nightly
 
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
 before_install:
     - curl -sS http://bldr.io/installer | php
     - php ./bldr.phar install
