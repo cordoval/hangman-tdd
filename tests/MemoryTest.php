@@ -7,6 +7,7 @@ use Qandidate\GameRepository;
 use Qandidate\InMemory;
 use Qandidate\InMemoryStorage;
 use Qandidate\Memory;
+use Qandidate\SqliteStorage;
 
 class MemoryTest extends \PHPUnit_Framework_TestCase
 {
