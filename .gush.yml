@@ -1,6 +1,6 @@
 adapter: github
 issue_tracker: github
-meta-header: "This file is part of Qandidate Hangman project.\n\n(c) 2015 Luis Cordova <cordoval@gmail.com>\n\nThis source file is subject to the MIT license that is bundled\nwith this source code in the file LICENSE."
+meta-header: "This file is part of Qandidate Hangman project.\n\n(c) Luis Cordova <cordoval@gmail.com>\n\nThis source file is subject to the MIT license that is bundled\nwith this source code in the file LICENSE."
 table-pr:
     fixed_tickets: ['Fixed Tickets', '']
     license: ['License', MIT]
