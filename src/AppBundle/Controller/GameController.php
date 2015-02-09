@@ -81,7 +81,6 @@ class GameController extends Controller
     {
         $game = $this->get('qandidate.repository.game')->find($id);
         $char = '';
-
         if ($request->isXmlHttpRequest()) {
             if (!empty($request->getContent())) {
                 $params = json_decode($request->getContent(), true);
