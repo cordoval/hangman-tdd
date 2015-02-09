@@ -55,6 +55,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
         $secondGame = Api::bootGame();
         $memory->save($secondGame);
 
+        $games = $memory->findAll();
         $this->assertCount(2, $games);
     }
 }

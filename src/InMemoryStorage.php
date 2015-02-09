@@ -33,16 +33,16 @@ class InMemoryStorage implements \ArrayAccess, GameStorage
 
     public function save(Api $game)
     {
-        $this[(string) $game] = serialize($game);
+        $this->bank[(string) $game] = serialize($game);
     }
 
     public function find($uuid)
     {
-        return unserialize($this[$uuid]);
+        return unserialize($this->bank[$uuid]);
     }
 
     public function findAll()
     {
-        return $this->bank;
+        return array_map(function ($item) { return unserialize($item); }, $this->bank);
     }
 }
