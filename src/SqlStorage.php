@@ -22,8 +22,10 @@ class SqlStorage implements GameStorage
                 $stmt = $this->db->prepare("INSERT INTO game (uuid, game) VALUES (:uuid, :game)");
             } catch (\Exception $exception) {
                 // when resubmitting a form too fast
+                return;
             }
         }
+
         $uuid = (string) $game;
         $serialized = serialize($game);
         $stmt->bindParam(':uuid', $uuid);

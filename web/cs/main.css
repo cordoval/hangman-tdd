@@ -1,0 +1,9 @@
+.hangman-font-mask {
+    font-size: 120px;
+    font-family: Monaco, monospace;
+    letter-spacing: 18px;
+}
+
+.ng-scope:first-child {
+    margin-top: 20px;
+}

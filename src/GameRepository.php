@@ -28,7 +28,7 @@ class GameRepository
             'uuid' => (string) $game,
             'tries_left' => $game->getTriesLeft(),
             'status' => $game->getStatus(),
-            'mask' => (string) $game->getMask(),
+            'mask' => strtoupper((string) $game->getMask()),
         ];
     }
 

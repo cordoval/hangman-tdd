@@ -1,50 +1,37 @@
 {% extends '::layout.html.twig' %}
 {% block body %}
-    <div id="app" ng-app="Qandidate">
-        <div ng-controller="CreateController">
+    <div id="app" class="row-fluid" ng-app="Qandidate">
+        <div class="text-center" ng-controller="CreateController">
             <form novalidate ng-submit="create()">
                 <button class="btn btn-lg btn-success" type="submit">Start New Game</button>
             </form>
         </div>
-        <div ng-view>
+        <div class="text-center" ng-view>
         </div>
-
         <script type="text/ng-template" id="index.html">
             <h1> Let's Play Hangman!</h1>
         </script>
-
         <script type="text/ng-template" id="view.html">
             <div ng-switch on="game.status">
                 <div ng-switch-when="busy">
                     <form novalidate ng-submit="guessChar()">
-                        <table>
-                            <tr>
-                                <td>Tries left</td>
-                                <td>[[ game.tries_left ]]</td>
-                            </tr>
-                            <tr>
-                                <td>Word</td>
-                                <td>[[ game.mask ]]</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="text" ng-model="form.attempted_char" />
-                                    <button class="btn btn-lg btn-success" type="submit">Guess</button>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="hangman-font-mask">
+                            [[ game.mask ]]
+                        </div>
+                        <div>
+                            <input type="text" ng-model="form.attempted_char" />
+                            <button class="btn btn-lg btn-primary" type="submit">Guess ([[ game.tries_left ]])</button>
+                        </div>
                     </form>
                 </div>
                 <div ng-switch-when="fail">
-                    GAME OVER.
-                    Oops, hanged!
+                    <h1>Oops, hanged!</h1>
                 </div>
                 <div ng-switch-when="success">
-                    GAME OVER
-                    Congratulations! You are the Word Ninja!
+                    <h1>Congratulations! You are the Word Ninja!</h1>
                 </div>
                 <div ng-switch-default>
-                    Game Not Found.
+                    <h1>Game Not Found.</h1>
                 </div>
             </div>
         </script>

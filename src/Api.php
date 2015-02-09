@@ -14,7 +14,7 @@ class Api
     const MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS = 11;
     const DEFAULT_SEED_WORD = 'someword';
 
-    const UNKNOWN_CHARACTER = '.';
+    const UNKNOWN_CHARACTER = '_';
     const FROM_A_TO_Z = '/^[a-z]$/';
 
     private $uuid;
