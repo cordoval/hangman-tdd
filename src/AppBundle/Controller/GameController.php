@@ -80,9 +80,21 @@ class GameController extends Controller
     public function guessCharacterAction($id, Request $request)
     {
         $game = $this->get('qandidate.repository.game')->find($id);
+        $char = '';
+
+        if ($request->isXmlHttpRequest()) {
+            $params = array();
+            $content = $this->get("request")->getContent();
+            if (!empty($content)) {
+                $params = json_decode($content, true);
+                $char = $params['char'];
+            }
+        } else {
+            $char = $request->request->get('char');
+        }
 
         try {
-            $isGoodGuess = $game->guessCharacter($request->request->get('char'));
+            $isGoodGuess = $game->guessCharacter($char);
         } catch (\Exception $exception) {
             return JsonResponse::create(
                 [
