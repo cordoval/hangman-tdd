@@ -6,13 +6,13 @@ use SQLite3;
 
 class SqliteStorage implements GameStorage
 {
-    const DB_FILE_LOCATION = __DIR__.'/../data/games.db3';
-
     private $db;
+    private $fileLocation;
 
     public function __construct()
     {
-        $this->db = new SQLite3(self::DB_FILE_LOCATION, SQLITE3_OPEN_READWRITE);
+        $this->fileLocation = __DIR__.'/../data/games.db3';
+        $this->db = new SQLite3($this->fileLocation, SQLITE3_OPEN_READWRITE);
     }
 
     public function save(Api $game)
@@ -34,10 +34,10 @@ class SqliteStorage implements GameStorage
 
     public static function wipeAndBoot()
     {
-        touch(self::DB_FILE_LOCATION);
-        unlink(self::DB_FILE_LOCATION);
+        touch(__DIR__.'/../data/games.db3');
+        unlink(__DIR__.'/../data/games.db3');
 
-        $db = new SQLite3(self::DB_FILE_LOCATION);
+        $db = new SQLite3(__DIR__.'/../data/games.db3');
         $db->exec('CREATE TABLE game (uuid STRING, game TEXT)');
         $db->close();
     }

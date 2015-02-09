@@ -40,4 +40,21 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
         $recoveredObject = $memory->find((string) $game);
         $this->assertEquals($recoveredObject, $game);
     }
+
+    /** @test */
+    public function it_fetches_all_games()
+    {
+        $memory = new GameRepository(new SqliteStorage());
+
+        $firstGame = Api::bootGame();
+        $memory->save($firstGame);
+
+        $games = $memory->findAll();
+        $this->assertCount(1, $games);
+
+        $secondGame = Api::bootGame();
+        $memory->save($secondGame);
+
+        $this->assertCount(2, $games);
+    }
 }
