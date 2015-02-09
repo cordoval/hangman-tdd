@@ -18,6 +18,22 @@ class WordMaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_tell_where_at_a_given_character_is()
+    {
+        $word = new Word('someword');
+
+        $this->assertEquals([1, 5], $word->whereAtIs('o'));
+    }
+
+    /** @test */
+    public function it_can_fetch_character_at_a_given_position()
+    {
+        $word = new Word('someword');
+
+        $this->assertEquals('o', $word->getCharacterAt(5));
+    }
+
+    /** @test */
     public function it_represents_a_mask()
     {
         $word = new Word('someword');
@@ -44,6 +60,6 @@ class WordMaskTest extends \PHPUnit_Framework_TestCase
         $eightMask = $seventhMask->unveilCharacter('r');
         $nineMask = $eightMask->unveilCharacter('d');
 
-        $this->assertFalse($mask->hasUnknownCharacters());
+        $this->assertFalse($nineMask->hasUnknownCharacters());
     }
 }

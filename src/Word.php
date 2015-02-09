@@ -25,4 +25,21 @@ class Word
     {
         return in_array($character, $this->value);
     }
+
+    public function getCharacterAt($position)
+    {
+        return $this->value[$position];
+    }
+
+    public function whereAtIs($character)
+    {
+        $indexes = [];
+        foreach ($this->value as $key => $item) {
+            if ($character === $item) {
+                $indexes[] = $key;
+            }
+        }
+
+        return $indexes;
+    }
 }
