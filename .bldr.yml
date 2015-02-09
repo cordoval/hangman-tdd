@@ -80,7 +80,7 @@ bldr:
                     type: exec
                     continueOnError: true
                     executable: composer
-                    arguments: [install]
+                    arguments: [install, -n]
         secure:
             tasks:
                 -
