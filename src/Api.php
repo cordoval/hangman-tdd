@@ -3,6 +3,7 @@
 namespace Qandidate;
 
 use Qandidate\Exception\GameHasAlreadyEnded;
+use ValueObjects\Identity\UUID;
 
 class Api
 {
@@ -44,7 +45,7 @@ class Api
 
     public function __toString()
     {
-        return $this->uuid;
+        return $this->uuid->toNative();
     }
 
     public function getTriesLeft()
@@ -69,7 +70,7 @@ class Api
 
     private function __construct($seedWord)
     {
-        $this->uuid = uniqid();
+        $this->uuid = new UUID();
         $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
         $this->status = self::GAME_BUSY;
 

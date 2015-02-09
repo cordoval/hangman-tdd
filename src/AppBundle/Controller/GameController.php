@@ -3,6 +3,7 @@
 namespace Qandidate\AppBundle\Controller;
 
 use Qandidate\Api;
+use Qandidate\GameRepository;
 use Qandidate\WordList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,23 +18,30 @@ class GameController extends Controller
      * @Route("/games", name="new_game")
      * @Method("POST")
      */
-    public function newGameAction()
+    public function newGameAction(Request $request)
     {
-        $wordList = WordList::boot();
-        $game = Api::bootGame($wordList->getWordAtRandom());
-        // @todo do tdd to repository service
+        $game = Api::bootGame((WordList::boot())->getWordAtRandom());
+
         $this->get('repository.game')->save($game);
 
-        $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::ajaxify($game));
+        }
+
+        return $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
     }
 
     /**
      * @Route("/games", name="all_games")
      * @Method("GET")
      */
-    public function allGamesAction()
+    public function allGamesAction(Request $request)
     {
         $games = $this->get('repository.game')->findAll();
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::flatten($games));
+        }
 
         return $this->render('default/all_games.html.twig', ['games' => $games]);
     }
@@ -43,8 +51,12 @@ class GameController extends Controller
      * @Method("GET")
      * @ParameterConverter()
      */
-    public function getGameAction(Api $game)
+    public function getGameAction(Api $game, Request $request)
     {
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::ajaxify($game));
+        }
+
         return $this->render('default/game.html.twig', ['game' => $game]);
     }
 
@@ -58,7 +70,12 @@ class GameController extends Controller
         try {
             $game->guessCharacter($request->request->get('char'));
         } catch (\Exception $exception) {
-            return JsonResponse::create(['status' => 'error', 'message' => 'Game has already ended']);
+            return JsonResponse::create(
+                [
+                    'status' => 'error',
+                    'message' => 'Game has already ended'
+                ]
+            );
         }
 
         return $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
