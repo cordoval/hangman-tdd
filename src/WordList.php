@@ -2,7 +2,7 @@
 
 namespace Qandidate;
 
-use \SplFileObject;
+use SplFileObject;
 
 class WordList
 {

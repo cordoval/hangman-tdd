@@ -6,3 +6,7 @@ services:
 
     qandidate.driver.sql:
         class: Qandidate\SqlStorage
+        arguments:
+            - '%database_name%'
+            - '%database_username%'
+            - '%database_password%'

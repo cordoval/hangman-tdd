@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests\WordList;
+namespace Qandidate\tests\WordList;
 
 use Qandidate\WordList;
 

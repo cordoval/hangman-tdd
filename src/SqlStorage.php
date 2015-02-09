@@ -8,9 +8,9 @@ class SqlStorage implements GameStorage
 {
     private $db;
 
-    public function __construct()
+    public function __construct($database_name, $database_username, $database_password)
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=qandidate','root','test');
+        $this->db = new PDO('mysql:host=localhost;dbname='.$database_name, $database_username, $database_password);
     }
 
     public function save(Api $game)
@@ -33,9 +33,9 @@ class SqlStorage implements GameStorage
         return unserialize($result['game']);
     }
 
-    public static function wipeAndBoot()
+    public static function wipeAndBoot($database_name, $database_user, $database_password)
     {
-        $db = new PDO('mysql:host=localhost;dbname=qandidate','root','test');
+        $db = new PDO('mysql:host=localhost;dbname='.$database_name, $database_user, $database_password);
         $db->exec('DROP TABLE IF EXISTS game');
         $db->exec('CREATE TABLE game (uuid VARCHAR(255), game TEXT)');
     }

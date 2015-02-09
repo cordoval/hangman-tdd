@@ -4,5 +4,9 @@
 Hangman TDD exercise
 
 ```bash
-./dev run
+export DATABASE_NAME=qandidate
+export DATABASE_USER=root
+export DATABASE_PASSWORD=test
+composer install
+php app/console util:sql
 ```

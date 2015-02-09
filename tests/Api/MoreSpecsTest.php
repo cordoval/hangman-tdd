@@ -5,7 +5,7 @@ namespace Qandidate\Tests\Api;
 use Qandidate\Api;
 use Qandidate\Exception\GameHasReceivedInvalidInput;
 
-class MoreSpecs extends \PHPUnit_Framework_TestCase
+class MoreSpecsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test

@@ -28,7 +28,11 @@ EOF
     {
         $output->writeln('Resetting SQLite db');
 
-        SqlStorage::wipeAndBoot();
+        SqlStorage::wipeAndBoot(
+            getenv('DATABASE_NAME'),
+            getenv('DATABASE_USERNAME'),
+            getenv('DATABASE_PASSWORD')
+        );
 
         $output->writeln('Done.');
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests;
+namespace Qandidate\tests;
 
 use Qandidate\Api;
 use Qandidate\GameRepository;
@@ -32,8 +32,14 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_bears_an_sql_implementation()
     {
+        $database_name = getenv('DATABASE_NAME');
+        $database_username = getenv('DATABASE_USERNAME');
+        $database_password = getenv('DATABASE_PASSWORD');
+
+        SqlStorage::wipeAndBoot($database_name, $database_username, $database_password);
+
         $game = Api::bootGame();
-        $memory = new GameRepository(new SqlStorage());
+        $memory = new GameRepository(new SqlStorage($database_name, $database_username, $database_password));
         $memory->save($game);
         $recoveredObject = $memory->find((string) $game);
         $this->assertEquals($recoveredObject, $game);
@@ -60,9 +66,13 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_fetches_all_games_for_sql_driver()
     {
-        SqlStorage::wipeAndBoot();
+        $database_name = getenv('DATABASE_NAME');
+        $database_username = getenv('DATABASE_USERNAME');
+        $database_password = getenv('DATABASE_PASSWORD');
 
-        $memory = new GameRepository(new SqlStorage());
+        SqlStorage::wipeAndBoot($database_name, $database_username, $database_password);
+
+        $memory = new GameRepository(new SqlStorage($database_name, $database_username, $database_password));
 
         $firstGame = Api::bootGame();
         $memory->save($firstGame);
