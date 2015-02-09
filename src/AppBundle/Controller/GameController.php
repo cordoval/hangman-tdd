@@ -62,7 +62,7 @@ class GameController extends Controller
     /**
      * @Route("/games/{id}", name="get_a_game")
      * @Method("GET")
-     * @ParameterConverter()
+     * @ParamConverter()
      */
     public function getGameAction(Api $game, Request $request)
     {
@@ -76,7 +76,7 @@ class GameController extends Controller
     /**
      * @Route("/games/{id}", name="guess_character")
      * @Method("POST")
-     * @ParameterConverter()
+     * @ParamConverter()
      */
     public function guessCharacterAction(Api $game, Request $request)
     {
