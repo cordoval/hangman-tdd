@@ -10,15 +10,17 @@ class Api
     const GAME_FAIL = 'fail';
     const GAME_SUCCESS = 'success';
     const MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS = 11;
-    const UNKNOWN_CHARACTER = '.';
-    const FROM_A_TO_Z = '/^[a-z]$/';
     const DEFAULT_SEED_WORD = 'someword';
 
+    const UNKNOWN_CHARACTER = '.';
+    const FROM_A_TO_Z = '/^[a-z]$/';
+
     private $uuid;
-    private $mask;
-    private $word;
     private $triesLeft;
     private $status;
+
+    private $mask;
+    private $word;
 
     public static function bootGame($seedWord = self::DEFAULT_SEED_WORD)
     {
@@ -51,14 +53,9 @@ class Api
         return $this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL;
     }
 
-    public function getMask()
+    public function __toString()
     {
-        return implode('', $this->mask);
-    }
-
-    public function getWord()
-    {
-        return implode('', $this->word);
+        return $this->uuid;
     }
 
     public function getTriesLeft()
@@ -71,18 +68,24 @@ class Api
         return $this->status;
     }
 
-    public function __toString()
+    public function getMask()
     {
-        return $this->uuid;
+        return implode('', $this->mask);
+    }
+
+    public function getWord()
+    {
+        return implode('', $this->word);
     }
 
     private function __construct($seedWord)
     {
         $this->uuid = uniqid();
-        $this->word = str_split($seedWord);
-        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
         $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
         $this->status = self::GAME_BUSY;
+
+        $this->word = str_split($seedWord);
+        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
     }
 
     private function updateState()
