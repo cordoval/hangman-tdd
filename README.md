@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cordoval/tdd-hangman.png?branch=master)](https://travis-ci.org/cordoval/tdd-hangman)
+[![Build Status](https://travis-ci.org/cordoval/hangman-tdd.svg?branch=master)](https://travis-ci.org/cordoval/hangman-tdd)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cordoval/hangman-tdd/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cordoval/hangman-tdd/?branch=master)
 
 Hangman TDD exercise
