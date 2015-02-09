@@ -2,17 +2,13 @@
 
 namespace Qandidate;
 
-use SQLite3;
-
-class SqliteStorage implements GameStorage
+class SqlStorage implements GameStorage
 {
     private $db;
-    private $fileLocation;
 
     public function __construct()
     {
-        $this->fileLocation = __DIR__.'/../data/games.db3';
-        $this->db = new SQLite3($this->fileLocation, SQLITE3_OPEN_READWRITE);
+        $this->db = new \PDO();
     }
 
     public function save(Api $game)
@@ -45,7 +41,7 @@ class SqliteStorage implements GameStorage
 
     public function findAll()
     {
-        $gameRows = $this->db->query('SELECT * FROM game')->fetchArray(SQLITE3_ASSOC);
+        $gameRows = $this->db->query('SELECT * FROM game WHERE 1 = 1')->fetchArray(SQLITE3_ASSOC);
 
         $callback = function ($item) {
             return unserialize(base64_decode($item));

@@ -6,13 +6,12 @@ use \SplFileObject;
 
 class WordList
 {
-    const DATA_PATH = __DIR__.'/../data/words.english';
     const START_LINE_NUMBER_OF_FILE = 0;
     const END_LINE_NUMBER_OF_FILE = 274906;
 
     protected $file;
 
-    public static function boot($dataPath = self::DATA_PATH)
+    public static function boot($dataPath = __DIR__.'/../data/words.english')
     {
         return new self($dataPath);
     }
