@@ -12,7 +12,7 @@ class SqliteStorage implements GameStorage
 
     public function __construct()
     {
-        $this->db = new SQLite3(self::DB_FILE_LOCATION);
+        $this->db = new SQLite3(self::DB_FILE_LOCATION, SQLITE3_OPEN_READWRITE);
     }
 
     public function save(Api $game)
@@ -39,17 +39,15 @@ class SqliteStorage implements GameStorage
 
         $db = new SQLite3(self::DB_FILE_LOCATION);
         $db->exec('CREATE TABLE game (uuid STRING, game TEXT)');
+        $db->close();
     }
 
     public function findAll()
     {
-        $stmt = $this->db->prepare('SELECT * FROM game');
-        $result = $stmt->execute();
-
-        $gameRows = $result->fetchArray(SQLITE3_ASSOC);
+        $gameRows = $this->db->query('SELECT * FROM game')->fetchArray(SQLITE3_ASSOC);
 
         $callback = function ($item) {
-            return unserialize(base64_decode($item['game']));
+            return unserialize(base64_decode($item));
         };
 
         return array_map($callback, $gameRows);

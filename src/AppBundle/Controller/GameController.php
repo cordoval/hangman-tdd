@@ -7,7 +7,6 @@ use Qandidate\GameRepository;
 use Qandidate\WordList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,10 +61,11 @@ class GameController extends Controller
     /**
      * @Route("/games/{id}", name="get_a_game")
      * @Method("GET")
-     * @ParamConverter()
      */
-    public function getGameAction(Api $game, Request $request)
+    public function getGameAction($id, Request $request)
     {
+        $game = $this->get('qandidate.repository.game')->find($id);
+
         if ($request->isXmlHttpRequest()) {
             return JsonResponse::create(GameRepository::ajaxify($game));
         }
@@ -76,10 +76,11 @@ class GameController extends Controller
     /**
      * @Route("/games/{id}", name="guess_character")
      * @Method("POST")
-     * @ParamConverter()
      */
-    public function guessCharacterAction(Api $game, Request $request)
+    public function guessCharacterAction($id, Request $request)
     {
+        $game = $this->get('qandidate.repository.game')->find($id);
+
         try {
             $isGoodGuess = $game->guessCharacter($request->request->get('char'));
         } catch (\Exception $exception) {
