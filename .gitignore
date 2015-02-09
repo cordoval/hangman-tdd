@@ -1,5 +1,5 @@
 /vendor
-/web
+/web/components
 *.phar
 *.lock
 /app/logs

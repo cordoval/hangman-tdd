@@ -22,11 +22,13 @@
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "bower install --allow-root",
             "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
             "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "bower install --allow-root",
             "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
             "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
         ]
