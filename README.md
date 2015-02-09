@@ -13,3 +13,7 @@ export DATABASE_PASSWORD=test
 composer install
 php app/console util:sql
 ```
+
+How it looks:
+
+<img src="https://cloud.githubusercontent.com/assets/328359/6115373/2bfc8dcc-b073-11e4-82ac-f3a802b5037b.png" alt="demo"  width="400px"/>

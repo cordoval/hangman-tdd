@@ -18,7 +18,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
     {
         $game = Api::bootGame();
         $mask = $game->getMask();
-        $this->assertTrue(strlen($mask) > 0 && 1 === preg_match('/^\.*$/', $mask));
+        $this->assertTrue(strlen($mask) > 0 && 1 === preg_match('/^\_*$/', $mask));
     }
 
     /** @test */
