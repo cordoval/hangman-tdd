@@ -7,3 +7,15 @@
 .ng-scope:first-child {
     margin-top: 20px;
 }
+
+.tries-left {
+    font-size: 20px;
+}
+
+.ng-scope:first-child .btn {
+    margin-top: 0;
+}
+
+.bottom-links {
+    margin-top: 15px;
+}
