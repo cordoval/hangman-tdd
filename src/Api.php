@@ -33,24 +33,13 @@ class Api
 
         $this->validateInput($attemptedCharacter);
 
-        $isCorrect = false;
-        foreach ($this->word as $key => $character) {
-            if ($character === $attemptedCharacter) {
-                $isCorrect = true;
-                $this->mask[$key] = $this->word[$key];
-            }
-        }
-
-        if (!$isCorrect) {
+        if ($this->word->hasCharacter($attemptedCharacter)) {
+            $this->mask = $this->mask->unveilCharacter($attemptedCharacter);
+        } else {
             $this->triesLeft--;
         }
 
         $this->updateState();
-    }
-
-    public function hasGameEnded()
-    {
-        return $this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL;
     }
 
     public function __toString()
@@ -70,12 +59,12 @@ class Api
 
     public function getMask()
     {
-        return implode('', $this->mask);
+        return (string) $this->mask;
     }
 
     public function getWord()
     {
-        return implode('', $this->word);
+        return (string) $this->word;
     }
 
     private function __construct($seedWord)
@@ -84,8 +73,8 @@ class Api
         $this->triesLeft = self::MAXIMUM_NUMBER_OF_FAILED_ATTEMPTS;
         $this->status = self::GAME_BUSY;
 
-        $this->word = str_split($seedWord);
-        $this->mask = array_fill(0, sizeof($this->word), self::UNKNOWN_CHARACTER);
+        $this->word = new Word($seedWord);
+        $this->mask = new Mask($this->word);
     }
 
     private function updateState()
@@ -96,7 +85,7 @@ class Api
             return;
         }
 
-        if (!in_array(self::UNKNOWN_CHARACTER, $this->mask)) {
+        if (!$this->mask->hasUnknownCharacters()) {
             $this->status = self::GAME_SUCCESS;
         }
     }
@@ -113,5 +102,10 @@ class Api
         if ($this->hasGameEnded()) {
             throw new GameHasAlreadyEnded();
         }
+    }
+
+    private function hasGameEnded()
+    {
+        return $this->status === self::GAME_SUCCESS || $this->status === self::GAME_FAIL;
     }
 }
