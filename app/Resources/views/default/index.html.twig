@@ -14,24 +14,39 @@
         </script>
 
         <script type="text/ng-template" id="view.html">
-            <form novalidate ng-submit="guessChar()">
-                <table>
-                    <tr>
-                        <td>Tries left</td>
-                        <td>[[ game.tries_left ]]</td>
-                    </tr>
-                    <tr>
-                        <td>Word</td>
-                        <td>[[ game.mask ]]</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="text" ng-model="attempted_char" />
-                            <button class="btn btn-lg btn-success" type="submit">Guess</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <div ng-switch on="game.status">
+                <div ng-switch-when="busy">
+                    <form novalidate ng-submit="guessChar()">
+                        <table>
+                            <tr>
+                                <td>Tries left</td>
+                                <td>[[ game.tries_left ]]</td>
+                            </tr>
+                            <tr>
+                                <td>Word</td>
+                                <td>[[ game.mask ]]</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="text" ng-model="form.attempted_char" />
+                                    <button class="btn btn-lg btn-success" type="submit">Guess</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div ng-switch-when="fail">
+                    GAME OVER.
+                    Oops, hanged!
+                </div>
+                <div ng-switch-when="success">
+                    GAME OVER
+                    Congratulations! You are the Word Ninja!
+                </div>
+                <div ng-switch-default>
+                    Game Not Found.
+                </div>
+            </div>
         </script>
     </div>
 {% endblock %}
