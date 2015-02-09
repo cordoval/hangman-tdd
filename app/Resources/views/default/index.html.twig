@@ -3,7 +3,7 @@
     <div id="app" ng-app="Qandidate">
         <div ng-controller="CreateController">
             <form novalidate ng-submit="create()">
-                <button type="submit">Start New Game</button>
+                <button class="btn btn-lg btn-success" type="submit">Start New Game</button>
             </form>
         </div>
         <div ng-view>
@@ -27,7 +27,7 @@
                     <tr>
                         <td colspan="2">
                             <input type="text" ng-model="attempted_char" />
-                            <button type="submit">Guess</button>
+                            <button class="btn btn-lg btn-success" type="submit">Guess</button>
                         </td>
                     </tr>
                 </table>
