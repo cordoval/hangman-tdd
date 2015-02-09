@@ -1,11 +1,11 @@
 <?php
 
-namespace Qandidate\Tests\Api;
+namespace Qandidate\tests\Api;
 
 use Qandidate\Api;
 use Qandidate\Exception\GameHasReceivedInvalidInput;
 
-class MoreSpecs extends \PHPUnit_Framework_TestCase
+class MoreSpecsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test

@@ -47,12 +47,6 @@ bldr:
             tasks:
                 -
                     type: exec
-                    executable: unset
-                    continueOnError: true
-                    arguments:
-                        - SPEC_ENV
-                -
-                    type: exec
                     executable: curl
                     continueOnError: true
                     arguments:
@@ -60,21 +54,6 @@ bldr:
                         - -S
                         - -o
                         - php-cs-fixer.phar
-                -
-                    type: exec
-                    executable: php
-                    continueOnError: true
-                    arguments:
-                        - php-cs-fixer.phar
-                        - fix
-                        - --config-file=.php_cs
-                -
-                    type: exec
-                    executable: set
-                    continueOnError: true
-                    arguments:
-                        - SPEC_ENV
-                        - true
                 -
                     type: exec
                     executable: php

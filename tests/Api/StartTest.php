@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests\Api;
+namespace Qandidate\tests\Api;
 
 use Qandidate\Api;
 

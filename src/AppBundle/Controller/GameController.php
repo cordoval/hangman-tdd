@@ -5,8 +5,8 @@ namespace Qandidate\AppBundle\Controller;
 use Qandidate\Api;
 use Qandidate\GameRepository;
 use Qandidate\WordList;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,7 +83,7 @@ class GameController extends Controller
         $char = '';
 
         if ($request->isXmlHttpRequest()) {
-            $params = array();
+            $params = [];
             $content = $this->get("request")->getContent();
             if (!empty($content)) {
                 $params = json_decode($content, true);

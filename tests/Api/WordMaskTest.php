@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests\Api;
+namespace Qandidate\tests\Api;
 
 use Qandidate\Mask;
 use Qandidate\Word;
@@ -51,7 +51,7 @@ class WordMaskTest extends \PHPUnit_Framework_TestCase
     {
         $word = new Word('someword');
         $mask = new Mask($word);
-        $this->assertEquals('someword', (string)$mask->getWord());
+        $this->assertEquals('someword', (string) $mask->getWord());
         $this->assertEquals($word->getLength(), $mask->getLength());
         $this->assertEquals('........', (string) $mask);
     }

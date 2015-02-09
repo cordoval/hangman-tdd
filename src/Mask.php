@@ -26,7 +26,7 @@ class Mask
             $maskedWord[$key] = $showOrHide ? $this->word->getCharacterAt($key) : $this->maskCharacter;
         }
 
-        return implode('' , $maskedWord);
+        return implode('', $maskedWord);
     }
 
     public function getWord()

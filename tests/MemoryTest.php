@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\Tests;
+namespace Qandidate\tests;
 
 use Qandidate\Api;
 use Qandidate\GameRepository;
