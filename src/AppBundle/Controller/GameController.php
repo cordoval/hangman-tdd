@@ -18,12 +18,22 @@ class GameController extends Controller
     const BAD_GUESS = 0;
 
     /**
+     * @Route("/", name="start")
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        return $this->render('default/index.html.twig');
+    }
+
+    /**
      * @Route("/games", name="new_game")
      * @Method("POST")
      */
     public function newGameAction(Request $request)
     {
-        $game = Api::bootGame((WordList::boot())->getWordAtRandom());
+        $wordList = WordList::boot();
+        $game = Api::bootGame($wordList->getWordAtRandom());
 
         $this->get('repository.game')->save($game);
 
