@@ -60,9 +60,13 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_fetches_all_games_for_sql_driver()
     {
-        SqlStorage::wipeAndBoot();
+        $database_name = 'localhost';
+        $database_username = 'root';
+        $database_password = 'test';
 
-        $memory = new GameRepository(new SqlStorage());
+        SqlStorage::wipeAndBoot($database_name, $database_username, $database_password);
+
+        $memory = new GameRepository(new SqlStorage($database_name, $database_username, $database_password));
 
         $firstGame = Api::bootGame();
         $memory->save($firstGame);
