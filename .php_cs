@@ -51,6 +51,7 @@ return Symfony\CS\Config\Config::create()
             'operators_spaces',
             'single_array_no_trailing_comma',
             'whitespacy_lines',
+            '-psr0',
             // 'strict',
         ]
     )
