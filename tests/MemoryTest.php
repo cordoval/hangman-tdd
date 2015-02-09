@@ -30,7 +30,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_bears_an_sqlite_implementation()
+    public function it_bears_an_sql_implementation()
     {
         $game = Api::bootGame();
         $memory = new GameRepository(new SqlStorage());
@@ -58,8 +58,10 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_fetches_all_games_for_sqlite_driver()
+    public function it_fetches_all_games_for_sql_driver()
     {
+        SqlStorage::wipeAndBoot();
+
         $memory = new GameRepository(new SqlStorage());
 
         $firstGame = Api::bootGame();
