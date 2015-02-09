@@ -42,9 +42,9 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_fetches_all_games()
+    public function it_fetches_all_games_for_in_memory()
     {
-        $memory = new GameRepository(new SqliteStorage());
+        $memory = new GameRepository(new InMemoryStorage());
 
         $firstGame = Api::bootGame();
         $memory->save($firstGame);
