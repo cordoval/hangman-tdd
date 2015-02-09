@@ -17,7 +17,7 @@ class EndTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals(11, $game->getTriesLeft());
         $this->assertEquals(Api::GAME_BUSY, $game->getStatus());
-        $this->assertEquals('somewor.', $game->getMask());
+        $this->assertEquals('somewor_', $game->getMask());
 
         $game->guessCharacter('d');
         $this->assertEquals(Api::GAME_SUCCESS, $game->getStatus());

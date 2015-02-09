@@ -35,13 +35,13 @@ class MoreSpecsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(11, $game->getTriesLeft());
         $game->guessCharacter('p');
         $this->assertEquals(10, $game->getTriesLeft());
-        $this->assertEquals('........', $game->getMask());
+        $this->assertEquals('________', $game->getMask());
         $game->guessCharacter('s');
         $this->assertEquals(10, $game->getTriesLeft());
-        $this->assertEquals('s.......', $game->getMask());
+        $this->assertEquals('s_______', $game->getMask());
         $game->guessCharacter('o');
         $this->assertEquals(10, $game->getTriesLeft());
-        $this->assertEquals('so...o..', $game->getMask());
+        $this->assertEquals('so___o__', $game->getMask());
     }
 
     /** @test */
@@ -58,7 +58,7 @@ class MoreSpecsTest extends \PHPUnit_Framework_TestCase
         $serialized = serialize($game);
         $restoredObject = unserialize($serialized);
 
-        $this->assertEquals('some.o..', $restoredObject->getMask());
+        $this->assertEquals('some_o__', $restoredObject->getMask());
         $this->assertEquals(10, $restoredObject->getTriesLeft());
         $this->assertEquals('someword', $restoredObject->getWord());
         $this->assertEquals(Api::GAME_BUSY, $restoredObject->getStatus());
