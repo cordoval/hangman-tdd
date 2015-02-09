@@ -58,4 +58,22 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
         $games = $memory->findAll();
         $this->assertCount(2, $games);
     }
+
+    /** @test */
+    public function it_fetches_all_games_for_sqlite_driver()
+    {
+        $memory = new GameRepository(new SqliteStorage());
+
+        $firstGame = Api::bootGame();
+        $memory->save($firstGame);
+
+        $games = $memory->findAll();
+        $this->assertCount(1, $games);
+
+        $secondGame = Api::bootGame();
+        $memory->save($secondGame);
+
+        $games = $memory->findAll();
+        $this->assertCount(2, $games);
+    }
 }
