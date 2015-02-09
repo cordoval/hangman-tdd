@@ -83,10 +83,8 @@ class GameController extends Controller
         $char = '';
 
         if ($request->isXmlHttpRequest()) {
-            $params = [];
-            $content = $this->get("request")->getContent();
-            if (!empty($content)) {
-                $params = json_decode($content, true);
+            if (!empty($request->getContent())) {
+                $params = json_decode($request->getContent(), true);
                 $char = $params['char'];
             }
         } else {
