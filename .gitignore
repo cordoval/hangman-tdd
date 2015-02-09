@@ -3,8 +3,10 @@
 /web/bundles
 *.phar
 *.lock
-/app/logs
-/app/cache
+/app/logs/*
+!/app/logs/.gitkeep
+/app/cache/*
+!/app/cache/.gitkeep
 /app/config/parameters.yml
 /app/bootstrap.php.cache
 /.bldr

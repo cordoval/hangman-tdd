@@ -15,7 +15,15 @@ class SqlStorage implements GameStorage
 
     public function save(Api $game)
     {
-        $stmt = $this->db->prepare("INSERT INTO game (uuid, game) VALUES (:uuid, :game)");
+        if ($this->find((string) $game)) {
+            $stmt = $this->db->prepare("UPDATE game SET game.game =  :game WHERE game.uuid = :uuid");
+        } else {
+            try {
+                $stmt = $this->db->prepare("INSERT INTO game (uuid, game) VALUES (:uuid, :game)");
+            } catch (\Exception $exception) {
+                // when resubmitting a form too fast
+            }
+        }
         $uuid = (string) $game;
         $serialized = serialize($game);
         $stmt->bindParam(':uuid', $uuid);
@@ -37,7 +45,7 @@ class SqlStorage implements GameStorage
     {
         $db = new PDO('mysql:host=localhost;dbname='.$database_name, $database_user, $database_password);
         $db->exec('DROP TABLE IF EXISTS game');
-        $db->exec('CREATE TABLE game (uuid VARCHAR(255), game TEXT)');
+        $db->exec('CREATE TABLE game (uuid VARCHAR(255), game TEXT, PRIMARY KEY (uuid))');
     }
 
     public function findAll()

@@ -26,12 +26,12 @@ EOF
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Resetting SQLite db');
+        $output->writeln('Resetting MySQL db');
 
         SqlStorage::wipeAndBoot(
-            getenv('DATABASE_NAME'),
-            getenv('DATABASE_USERNAME'),
-            getenv('DATABASE_PASSWORD')
+            $this->getContainer()->getParameter('database_name'),
+            $this->getContainer()->getParameter('database_username'),
+            $this->getContainer()->getParameter('database_password')
         );
 
         $output->writeln('Done.');
