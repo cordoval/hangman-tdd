@@ -28,7 +28,7 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_does_and_does_not_increment_dots_in_the_middle_of_a_game()
+    public function it_does_and_does_not_decrement_dots_in_the_middle_of_a_game()
     {
         $game = Api::bootGame();
         $this->assertEquals(11, $game->getTriesLeft());

@@ -6,19 +6,16 @@ class Mask
 {
     const SHOW = 1;
     const HIDE = 0;
+    const DEFAULT_MASK_CHARACTER = '.';
 
     private $word;
     private $value;
+    private $maskCharacter;
 
-    public function __construct(Word $word, $seedValue = null, $maskCharacter = '.')
+    public function __construct(Word $word, $seedValue = null, $maskCharacter = self::DEFAULT_MASK_CHARACTER)
     {
         $this->word = $word;
-        if (null === $seedValue) {
-            $this->value = array_fill(0, $word->getLength(), self::HIDE);
-        } else {
-            $this->value = $seedValue;
-        }
-
+        $this->value = null === $seedValue ? array_fill(0, $word->getLength(), self::HIDE) : $seedValue;
         $this->maskCharacter = $maskCharacter;
     }
 

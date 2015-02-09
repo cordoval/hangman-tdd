@@ -7,7 +7,7 @@ use Qandidate\Api;
 class StartTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-    public function it_starts_a_game()
+    public function it_starts_a_game_game_started_is_identifiable()
     {
         $game = Api::bootGame();
         $this->assertTrue(is_string((string) $game));
