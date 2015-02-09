@@ -2,9 +2,14 @@
 <html>
     <head>
         <title>{% block title %}Qandidate Hangman{% endblock %}</title>
+        <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.min.css">
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body role="document">
+        <div class="container theme-showcase" role="main">
+            {% block body %}{% endblock %}
+        </div>
+        <script type="text/javascript" src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/components/angular/angular.min.js"></script>
         <script type="text/javascript" src="/components/angular-route/angular-route.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
