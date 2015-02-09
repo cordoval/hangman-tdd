@@ -40,6 +40,7 @@ class SqliteStorage implements GameStorage
         $db = new SQLite3(__DIR__.'/../data/games.db3');
         $db->exec('CREATE TABLE game (uuid STRING, game TEXT)');
         $db->close();
+        chmod(__DIR__.'/../data/games.db3', 0777);
     }
 
     public function findAll()
