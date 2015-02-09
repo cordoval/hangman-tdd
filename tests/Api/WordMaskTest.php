@@ -1,6 +1,6 @@
 <?php
 
-namespace Qandidate\tests\Api;
+namespace Qandidate\Tests\Api;
 
 use Qandidate\Mask;
 use Qandidate\Word;
