@@ -7,12 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SqliteCommand extends ContainerAwareCommand
+class SqlCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('util:sqlite')
+            ->setName('util:sql')
             ->setDescription('Creates SQLite database anew')
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command creates SQLite database anew:
