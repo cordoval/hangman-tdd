@@ -31,7 +31,7 @@ class GameController extends Controller
      */
     public function newGameAction(Request $request)
     {
-        $wordList = WordList::boot($this->get('kernel.root_dir').'/../data/words.english');
+        $wordList = WordList::boot($this->container->getParameter('kernel.root_dir').'/../data/words.english');
         $game = Api::bootGame($wordList->getWordAtRandom());
 
         $this->get('qandidate.repository.game')->save($game);
