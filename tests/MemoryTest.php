@@ -5,7 +5,7 @@ namespace Qandidate\Tests;
 use Qandidate\Api;
 use Qandidate\GameRepository;
 use Qandidate\InMemoryStorage;
-use Qandidate\SqliteStorage;
+use Qandidate\SqlStorage;
 
 class MemoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +33,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     public function it_bears_an_sqlite_implementation()
     {
         $game = Api::bootGame();
-        $memory = new GameRepository(new SqliteStorage());
+        $memory = new GameRepository(new SqlStorage());
         $memory->save($game);
         $recoveredObject = $memory->find((string) $game);
         $this->assertEquals($recoveredObject, $game);
@@ -60,7 +60,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_fetches_all_games_for_sqlite_driver()
     {
-        $memory = new GameRepository(new SqliteStorage());
+        $memory = new GameRepository(new SqlStorage());
 
         $firstGame = Api::bootGame();
         $memory->save($firstGame);

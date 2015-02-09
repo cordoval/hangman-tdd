@@ -2,7 +2,7 @@
 
 namespace Qandidate\AppBundle\Command;
 
-use Qandidate\SqliteStorage;
+use Qandidate\SqlStorage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,7 +28,7 @@ EOF
     {
         $output->writeln('Resetting SQLite db');
 
-        SqliteStorage::wipeAndBoot();
+        SqlStorage::wipeAndBoot();
 
         $output->writeln('Done.');
     }

@@ -2,7 +2,7 @@ services:
     qandidate.repository.game:
         class: Qandidate\GameRepository
         arguments:
-            - @qandidate.driver.sqlite3
+            - @qandidate.driver.sql
 
-    qandidate.driver.sqlite3:
-        class: Qandidate\SqliteStorage
+    qandidate.driver.sql:
+        class: Qandidate\SqlStorage

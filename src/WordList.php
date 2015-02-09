@@ -11,7 +11,7 @@ class WordList
 
     protected $file;
 
-    public static function boot($dataPath = __DIR__.'/../data/words.english')
+    public static function boot($dataPath)
     {
         return new self($dataPath);
     }
