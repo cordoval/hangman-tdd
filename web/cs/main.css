@@ -2,3 +2,7 @@
     font-size: 120px;
     font-family: Monaco;
 }
+
+.ng-scope:first-child {
+    margin-top: 20px;
+}
