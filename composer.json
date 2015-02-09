@@ -43,7 +43,12 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "symlink",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_name": "DATABASE_NAME",
+                "database_username": "DATABASE_USERNAME",
+                "database_password": "DATABASE_PASSWORD"
+            }
         }
     }
 }

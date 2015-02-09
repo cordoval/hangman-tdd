@@ -1,8 +1,8 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
-    # You should uncomment this if you want use pdo_sqlite
-    database_path: "%kernel.root_dir%/../data/games.db3"
-
+    database_name: qandidate
+    database_username: root
+    database_password: test
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens

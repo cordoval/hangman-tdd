@@ -29,9 +29,9 @@ EOF
         $output->writeln('Resetting SQLite db');
 
         SqlStorage::wipeAndBoot(
-            $this->getContainer()->getParameter('database_name'),
-            $this->getContainer()->getParameter('database_user'),
-            $this->getContainer()->getParameter('database_password')
+            getenv('DATABASE_NAME'),
+            getenv('DATABASE_USERNAME'),
+            getenv('DATABASE_PASSWORD')
         );
 
         $output->writeln('Done.');
