@@ -74,7 +74,7 @@ class Api
         $this->status = self::GAME_BUSY;
 
         $this->word = new Word($seedWord);
-        $this->mask = new Mask($this->word);
+        $this->mask = new Mask($this->word, null, self::UNKNOWN_CHARACTER);
     }
 
     private function updateState()
