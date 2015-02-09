@@ -6,13 +6,27 @@
                 <button class="btn btn-lg btn-success" type="submit">Start New Game</button>
             </form>
         </div>
-        <div class="text-center" ng-view>
+        <div ng-view>
         </div>
         <script type="text/ng-template" id="index.html">
             <h1> Let's Play Hangman!</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Game Word</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="span3" ng-repeat="game in games">
+                        <td><a ng-href="[[ routingPrefix ]]/#/games/[[ game.uuid ]]">[[ game.mask ]]</a></td>
+                        <td>[[ game.status ]]</td>
+                    </tr>
+                </tbody>
+            </table>
         </script>
         <script type="text/ng-template" id="view.html">
-            <div ng-switch on="game.status">
+            <div class="text-center" ng-switch on="game.status" tabindex="0" ng-keydown="form.onKeyDown()">
                 <div ng-switch-when="busy">
                     <form novalidate ng-submit="guessChar()">
                         <div class="hangman-font-mask">
