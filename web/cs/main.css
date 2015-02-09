@@ -1,6 +1,6 @@
 .hangman-font-mask {
     font-size: 120px;
-    font-family: Monaco;
+    font-family: Monaco, monospace;
     letter-spacing: 18px;
 }
 
