@@ -22,13 +22,17 @@
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
-            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+            "bower install --allow-root",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::clearCache",
-            "Pcna\\Bundle\\DevBundle\\Composer\\ScriptHandler::installAssets"
+            "bower install --allow-root",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ]
     },
     "config": {

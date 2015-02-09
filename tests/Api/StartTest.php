@@ -7,7 +7,7 @@ use Qandidate\Api;
 class StartTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-    public function it_starts_a_game()
+    public function it_starts_a_game_game_started_is_identifiable()
     {
         $game = Api::bootGame();
         $this->assertTrue(is_string((string) $game));
@@ -40,7 +40,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
     {
         $game = Api::bootGame();
         $this->assertEquals(11, $game->getTriesLeft());
-        $game->guessCharacter('x');
+        $this->assertFalse($game->guessCharacter('x'));
         $this->assertEquals(10, $game->getTriesLeft());
     }
 
@@ -50,7 +50,7 @@ class StartTest extends \PHPUnit_Framework_TestCase
         $game = Api::bootGame();
         $this->assertEquals(11, $game->getTriesLeft());
         $correctWord = $game->getWord();
-        $game->guessCharacter($correctWord[0]);
+        $this->assertTrue($game->guessCharacter($correctWord[0]));
         $this->assertEquals(11, $game->getTriesLeft());
     }
 

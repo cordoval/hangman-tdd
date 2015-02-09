@@ -21,4 +21,24 @@ class GameRepository
     {
         return $this->storage->find($uuid);
     }
+
+    public static function ajaxify(Api $game)
+    {
+        return [
+            'uuid' => (string) $game,
+            'tries_left' => $game->getTriesLeft(),
+            'status' => $game->getStatus(),
+            'mask' => (string) $game->getMask(),
+        ];
+    }
+
+    public static function flatten(array $games)
+    {
+        return array_map(function ($game) { return self::ajaxify($game); }, $games);
+    }
+
+    public function findAll()
+    {
+        return $this->storage->findAll();
+    }
 }

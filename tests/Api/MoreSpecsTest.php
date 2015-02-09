@@ -3,6 +3,7 @@
 namespace Qandidate\Tests\Api;
 
 use Qandidate\Api;
+use Qandidate\Exception\GameHasReceivedInvalidInput;
 
 class MoreSpecs extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +13,7 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_an_exception_when_passed_invalid_character_on_input($inputCharacter)
     {
-        $this->setExpectedException('InvalidArgumentException', 'Please provide input with pattern a-z');
+        $this->setExpectedException(GameHasReceivedInvalidInput::class);
         $game = Api::bootGame();
         $game->guessCharacter($inputCharacter);
     }
@@ -28,7 +29,7 @@ class MoreSpecs extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_does_and_does_not_increment_dots_in_the_middle_of_a_game()
+    public function it_does_and_does_not_decrement_dots_in_the_middle_of_a_game()
     {
         $game = Api::bootGame();
         $this->assertEquals(11, $game->getTriesLeft());

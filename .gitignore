@@ -1,8 +1,10 @@
 /vendor
-/web
+/web/components
+/web/bundles
 *.phar
 *.lock
 /app/logs
 /app/cache
 /app/config/parameters.yml
+/app/bootstrap.php.cache
 *.db3

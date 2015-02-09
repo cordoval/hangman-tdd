@@ -2,12 +2,12 @@
 
 namespace Qandidate\Exception;
 
-class GameHasAlreadyEnded extends GameException
+class GameHasReceivedInvalidInput extends GameException
 {
     public function __construct()
     {
         parent::__construct(
-            'You cannot keep playing a game that has already ended.'
+            'The character you have guessed is invalid. Please try a-z.'
         );
     }
 }

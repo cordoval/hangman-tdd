@@ -3,37 +3,57 @@
 namespace Qandidate\AppBundle\Controller;
 
 use Qandidate\Api;
+use Qandidate\GameRepository;
 use Qandidate\WordList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class GameController extends Controller
 {
+    const GOOD_GUESS = 1;
+    const BAD_GUESS = 0;
+
+    /**
+     * @Route("/", name="start")
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        return $this->render('default/index.html.twig');
+    }
+
     /**
      * @Route("/games", name="new_game")
      * @Method("POST")
      */
-    public function newGameAction()
+    public function newGameAction(Request $request)
     {
-        $wordList = WordList::boot();
+        $wordList = WordList::boot($this->container->getParameter('kernel.root_dir').'/../data/words.english');
         $game = Api::bootGame($wordList->getWordAtRandom());
-        // @todo do tdd to repository service
-        $this->get('repository.game')->save($game);
 
-        $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
+        $this->get('qandidate.repository.game')->save($game);
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::ajaxify($game));
+        }
+
+        return $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
     }
 
     /**
      * @Route("/games", name="all_games")
      * @Method("GET")
      */
-    public function allGamesAction()
+    public function allGamesAction(Request $request)
     {
-        $games = $this->get('repository.game')->findAll();
+        $games = $this->get('qandidate.repository.game')->findAll();
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::flatten($games));
+        }
 
         return $this->render('default/all_games.html.twig', ['games' => $games]);
     }
@@ -41,25 +61,50 @@ class GameController extends Controller
     /**
      * @Route("/games/{id}", name="get_a_game")
      * @Method("GET")
-     * @ParameterConverter()
      */
-    public function getGameAction(Api $game)
+    public function getGameAction($id, Request $request)
     {
+        $game = $this->get('qandidate.repository.game')->find($id);
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(GameRepository::ajaxify($game));
+        }
+
         return $this->render('default/game.html.twig', ['game' => $game]);
     }
 
     /**
      * @Route("/games/{id}", name="guess_character")
      * @Method("POST")
-     * @ParameterConverter()
      */
-    public function guessCharacterAction(Api $game, Request $request)
+    public function guessCharacterAction($id, Request $request)
     {
+        $game = $this->get('qandidate.repository.game')->find($id);
+
         try {
-            $game->guessCharacter($request->request->get('char'));
+            $isGoodGuess = $game->guessCharacter($request->request->get('char'));
         } catch (\Exception $exception) {
-            return JsonResponse::create(['status' => 'error', 'message' => 'Game has already ended']);
+            return JsonResponse::create(
+                [
+                    'status' => 'error',
+                    'message' => $exception->getMessage(),
+                ]
+            );
         }
+
+        $this->get('qandidate.repository.game')->save($game);
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(
+                [
+                    'status' => 'success',
+                    'message' => $isGoodGuess ? self::GOOD_GUESS : self::BAD_GUESS,
+                    'game' => GameRepository::ajaxify($game),
+                ]
+            );
+        }
+
+        $this->addFlash('notice', $isGoodGuess ? 'Good guess!' : 'Bad guess :(');
 
         return $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
     }
