@@ -3,7 +3,7 @@
     <div id="app" ng-app="Qandidate">
         <div ng-controller="CreateController">
             <form novalidate ng-submit="create()">
-                <button type="submit">Create New Game</button>
+                <button type="submit">Start New Game</button>
             </form>
         </div>
         <div ng-view>
@@ -17,15 +17,7 @@
             <form novalidate ng-submit="guessChar()">
                 <table>
                     <tr>
-                        <td>UUID</td>
-                        <td>[[ game.uuid ]]</td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td>[[ game.status ]]</td>
-                    </tr>
-                    <tr>
-                        <td>Tries Teft</td>
+                        <td>Tries left</td>
                         <td>[[ game.tries_left ]]</td>
                     </tr>
                     <tr>
