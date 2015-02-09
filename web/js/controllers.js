@@ -15,20 +15,25 @@ window.app
     .controller('ViewController', ['$scope', '$routeParams', 'gameRepository', function ($scope, $routeParams, gameRepository) {
         $scope.game = {};
         $scope.form = {
-            attempted_char: '',
-            //letters: "abcdefghijklmnopqrstuvwxyz".toCharArray(),
+            letters: "abcdefghijklmnopqrstuvwxyz".split(''),
+            submitting: false
         };
 
         gameRepository.getGame($routeParams.id, function (game) {
             $scope.game = game;
         });
 
-        $scope.guessChar = function () {
-            gameRepository.guessChar($routeParams.id, $scope.form.attempted_char, function (data) {
+        $scope.guessChar = function (attempted_char) {
+            $scope.form.submitting = true;
+            gameRepository.guessChar($routeParams.id, attempted_char, function (data) {
                 $scope.game = data.game;
+                $scope.form.submitting = false;
             });
 
-            $scope.form.attempted_char = '';
+            var charAt = $scope.form.letters.indexOf(attempted_char);
+            var letters = $scope.form.letters;
+            letters.splice(charAt, 1);
+            $scope.form.letters = letters;
         };
     }])
 ;

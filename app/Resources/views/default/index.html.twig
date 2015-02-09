@@ -26,15 +26,17 @@
             </table>
         </script>
         <script type="text/ng-template" id="view.html">
-            <div class="text-center" ng-switch on="game.status" tabindex="0" ng-keydown="form.onKeyDown()">
+            <div class="text-center" ng-switch on="game.status" ng-keydown="form.onKeyDown()">
                 <div ng-switch-when="busy">
                     <form novalidate ng-submit="guessChar()">
+                        <div class="alert alert-danger tries-left" role="alert">
+                            [[ game.tries_left ]] tries left
+                        </div>
                         <div class="hangman-font-mask">
                             [[ game.mask ]]
                         </div>
-                        <div>
-                            <input type="text" ng-model="form.attempted_char" />
-                            <button class="btn btn-lg btn-primary" type="submit">Guess ([[ game.tries_left ]])</button>
+                        <div class="btn-group">
+                            <button ng-disabled="[[ form.submitting ]]" ng-repeat="letter in form.letters" class="btn btn-primary btn-sm" ng-click="guessChar(letter)" type="button">[[ letter ]]</button>
                         </div>
                     </form>
                 </div>
@@ -46,6 +48,9 @@
                 </div>
                 <div ng-switch-default>
                     <h1>Game Not Found.</h1>
+                </div>
+                <div class="bottom-links">
+                    <a ng-href="[[ routingPrefix ]]/#/">All Games</a>
                 </div>
             </div>
         </script>
