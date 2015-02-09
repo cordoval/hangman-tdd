@@ -40,4 +40,9 @@ class InMemoryStorage implements \ArrayAccess, GameStorage
     {
         return unserialize($this[$uuid]);
     }
+
+    public function findAll()
+    {
+        return $this->bank;
+    }
 }

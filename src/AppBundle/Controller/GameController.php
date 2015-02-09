@@ -35,7 +35,7 @@ class GameController extends Controller
         $wordList = WordList::boot();
         $game = Api::bootGame($wordList->getWordAtRandom());
 
-        $this->get('repository.game')->save($game);
+        $this->get('qandidate.repository.game')->save($game);
 
         if ($request->isXmlHttpRequest()) {
             return JsonResponse::create(GameRepository::ajaxify($game));
@@ -50,7 +50,7 @@ class GameController extends Controller
      */
     public function allGamesAction(Request $request)
     {
-        $games = $this->get('repository.game')->findAll();
+        $games = $this->get('qandidate.repository.game')->findAll();
 
         if ($request->isXmlHttpRequest()) {
             return JsonResponse::create(GameRepository::flatten($games));
@@ -91,7 +91,7 @@ class GameController extends Controller
             );
         }
 
-        $this->get('repository.game')->save($game);
+        $this->get('qandidate.repository.game')->save($game);
 
         if ($request->isXmlHttpRequest()) {
             return JsonResponse::create(

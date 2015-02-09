@@ -3,7 +3,6 @@
 namespace Qandidate;
 
 use SQLite3;
-use Symfony\Component\VarDumper\VarDumper;
 
 class SqliteStorage implements GameStorage
 {
@@ -40,5 +39,19 @@ class SqliteStorage implements GameStorage
 
         $db = new SQLite3(self::DB_FILE_LOCATION);
         $db->exec('CREATE TABLE game (uuid STRING, game TEXT)');
+    }
+
+    public function findAll()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM game');
+        $result = $stmt->execute();
+
+        $gameRows = $result->fetchArray(SQLITE3_ASSOC);
+
+        $callback = function ($item) {
+            return unserialize(base64_decode($item['game']));
+        };
+
+        return array_map($callback, $gameRows);
     }
 }

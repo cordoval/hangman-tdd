@@ -25,7 +25,7 @@ class GameRepository
     public static function ajaxify(Api $game)
     {
         return [
-            'word' => (string) $game->getWord(),
+            'uuid' => (string) $game,
             'tries_left' => $game->getTriesLeft(),
             'status' => $game->getStatus(),
             'mask' => (string) $game->getMask(),
@@ -35,5 +35,10 @@ class GameRepository
     public static function flatten(array $games)
     {
         return array_map(function ($game) { return self::ajaxify($game); }, $games);
+    }
+
+    public function findAll()
+    {
+        return $this->storage->findAll();
     }
 }
