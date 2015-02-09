@@ -3,6 +3,7 @@
 namespace Qandidate;
 
 use Qandidate\Exception\GameHasAlreadyEnded;
+use Qandidate\Exception\GameHasReceivedInvalidInput;
 use ValueObjects\Identity\UUID;
 
 class Api
@@ -34,13 +35,15 @@ class Api
 
         $this->validateInput($attemptedCharacter);
 
-        if ($this->word->hasCharacter($attemptedCharacter)) {
+        if ($isGoodGuess = $this->word->hasCharacter($attemptedCharacter)) {
             $this->mask = $this->mask->unveilCharacter($attemptedCharacter);
         } else {
             $this->triesLeft--;
         }
 
         $this->updateState();
+
+        return $isGoodGuess;
     }
 
     public function __toString()
@@ -94,7 +97,7 @@ class Api
     private function validateInput($attemptedCharacter)
     {
         if (!preg_match(self::FROM_A_TO_Z, $attemptedCharacter)) {
-            throw new \InvalidArgumentException('Please provide input with pattern a-z');
+            throw new GameHasReceivedInvalidInput();
         }
     }
 

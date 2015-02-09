@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GameController extends Controller
 {
+    const GOOD_GUESS = 1;
+    const BAD_GUESS = 0;
+
     /**
      * @Route("/games", name="new_game")
      * @Method("POST")
@@ -68,15 +71,29 @@ class GameController extends Controller
     public function guessCharacterAction(Api $game, Request $request)
     {
         try {
-            $game->guessCharacter($request->request->get('char'));
+            $isGoodGuess = $game->guessCharacter($request->request->get('char'));
         } catch (\Exception $exception) {
             return JsonResponse::create(
                 [
                     'status' => 'error',
-                    'message' => 'Game has already ended'
+                    'message' => $exception->getMessage(),
                 ]
             );
         }
+
+        $this->get('repository.game')->save($game);
+
+        if ($request->isXmlHttpRequest()) {
+            return JsonResponse::create(
+                [
+                    'status' => 'success',
+                    'message' => $isGoodGuess ? self::GOOD_GUESS : self::BAD_GUESS,
+                    'game' => GameRepository::ajaxify($game),
+                ]
+            );
+        }
+
+        $this->addFlash('notice', $isGoodGuess ? 'Good guess!' : 'Bad guess :(');
 
         return $this->redirectToRoute('get_a_game', ['id' => (string) $game]);
     }
