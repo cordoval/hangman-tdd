@@ -15,5 +15,5 @@ before_install:
     - php ./bldr.phar install
 
 script:
-    - php ./bldr.phar test
+    - php ./bldr.phar travis
     - php ./bldr.phar run secure
