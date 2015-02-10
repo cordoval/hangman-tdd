@@ -7,9 +7,9 @@ matrix:
 
 sudo: false
 
-cache:
-    directories:
-        - $HOME/.composer/cache
+#cache:
+#    directories:
+#        - $HOME/.composer/cache
 
 before_install:
     - curl -sS http://bldr.io/installer | php
