@@ -17,3 +17,11 @@ php app/console util:sql
 How it looks:
 
 <img src="https://cloud.githubusercontent.com/assets/328359/6115373/2bfc8dcc-b073-11e4-82ac-f3a802b5037b.png" alt="demo"  width="400px"/>
+
+From Exodus 9:14-16 (ESV):
+
+ > For this time I will send all my plagues on you yourself, and on your servants and your people,
+ > so that you may know that there is none like me in all the earth. For by now I could have put
+ > out my hand and struck you and your people with pestilence, and you would have been cut off from
+ > the earth. But for this purpose I have raised you up, to show you my power, so that my name may
+ > be proclaimed in all the earth.
