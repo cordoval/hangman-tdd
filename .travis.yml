@@ -12,9 +12,8 @@ cache:
         - $HOME/.composer/cache
 
 before_install:
-    - curl -sS http://bldr.io/installer | php
     - php ./bldr.phar install
 
 script:
     - php ./bldr.phar test
-    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ]; then php ./bldr.phar run secure; fi;'
+    - php ./bldr.phar run secure
