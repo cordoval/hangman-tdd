@@ -2,6 +2,7 @@
 /web/components
 /web/bundles
 *.phar
+!bldr.phar
 *.lock
 /app/logs/*
 !/app/logs/.gitkeep
