@@ -11,7 +11,6 @@ export DATABASE_NAME=qandidate
 export DATABASE_USER=root
 export DATABASE_PASSWORD=test
 composer install
-bower install --allow-root
 php app/console util:sql
 ```
 
