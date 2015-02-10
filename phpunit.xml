@@ -9,8 +9,8 @@
     <php>
         <ini name="date.timezone" value="America/Lima"/>
         <env name="DATABASE_NAME" value="qandidate"/>
-        <env name="DATABASE_USERNAME" value="root"/>
-        <env name="DATABASE_PASSWORD" value="test"/>
+        <env name="DATABASE_USERNAME" value="travis"/>
+        <env name="DATABASE_PASSWORD" value=""/>
     </php>
 
     <testsuites>
